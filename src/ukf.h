@@ -11,6 +11,12 @@ using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
 class UKF {
+private:
+  void AugmentedSigmaPoints(MatrixXd* Xsig_aug);
+  void SigmaPointPrediction(MatrixXd& Xsig_aug, double delta_t);
+  void PredictMeanAndCovariance();
+  void PredictRadarMeasurement();
+
 public:
 
   ///* initially set to false, set to true in first call of ProcessMeasurement
@@ -67,7 +73,15 @@ public:
   ///* Sigma point spreading parameter
   double lambda_;
 
+  //Radar measurement dimension for r, phi, and r_dot
+  int n_z_;
 
+  ///* Radar predicted state vector: [r phi r_dot]
+  VectorXd z_pred_;
+  ///* measurement covariance matrix S
+  MatrixXd S_;
+  ///* matrix for sigma points in measurement space
+  MatrixXd Zsig_pred_;
   /**
    * Constructor
    */
