@@ -12,9 +12,12 @@ using Eigen::VectorXd;
 
 class UKF {
 private:
+  // Helper functions, mostly copies of exercises from lessons,
+  // modified as needed, with hardcoded exercise values removed
   void AugmentedSigmaPoints(MatrixXd* Xsig_aug);
   void SigmaPointPrediction(MatrixXd& Xsig_aug, double delta_t);
   void PredictMeanAndCovariance();
+  // Common function to predict measurement for either laser or radar
   void PredictMeasurement(MeasurementPackage::SensorType sensor_type);
 
 public:
