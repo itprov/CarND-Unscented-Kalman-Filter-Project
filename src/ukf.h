@@ -15,7 +15,7 @@ private:
   void AugmentedSigmaPoints(MatrixXd* Xsig_aug);
   void SigmaPointPrediction(MatrixXd& Xsig_aug, double delta_t);
   void PredictMeanAndCovariance();
-  void PredictRadarMeasurement();
+  void PredictMeasurement(MeasurementPackage::SensorType sensor_type);
 
 public:
 
@@ -73,10 +73,11 @@ public:
   ///* Sigma point spreading parameter
   double lambda_;
 
-  //Radar measurement dimension for r, phi, and r_dot
+  ///* Measurement sample
+  int k_;
+  ///* Radar / Lidar measurement dimension for r, phi, and r_dot / p_x, p_y
   int n_z_;
-
-  ///* Radar predicted state vector: [r phi r_dot]
+  ///* Radar / Lidar predicted state vector: [r phi r_dot] / [p_x p_y]
   VectorXd z_pred_;
   ///* measurement covariance matrix S
   MatrixXd S_;
@@ -106,16 +107,11 @@ public:
   void Prediction(double delta_t);
 
   /**
-   * Updates the state and the state covariance matrix using a laser measurement
+   * Updates the state and the state covariance matrix using a measurement
+   * Measurement can be either laser or radar
    * @param meas_package The measurement at k+1
    */
-  void UpdateLidar(MeasurementPackage meas_package);
-
-  /**
-   * Updates the state and the state covariance matrix using a radar measurement
-   * @param meas_package The measurement at k+1
-   */
-  void UpdateRadar(MeasurementPackage meas_package);
+  void Update(MeasurementPackage meas_package);
 };
 
 #endif /* UKF_H */

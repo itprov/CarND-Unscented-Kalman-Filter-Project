@@ -1,7 +1,7 @@
 # Unscented Kalman Filter Project Starter Code
 Self-Driving Car Engineer Nanodegree Program
 
-In this project utilize an Unscented Kalman Filter to estimate the state of a moving object of interest with noisy lidar and radar measurements. Passing the project requires obtaining RMSE values that are lower that the tolerance outlined in the project rubric. 
+In this project utilize an Unscented Kalman Filter to estimate the state of a moving object of interest with noisy lidar and radar measurements. Passing the project requires obtaining RMSE values that are lower that the tolerance outlined in the project rubric.
 
 This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)
 
@@ -14,6 +14,12 @@ Once the install for uWebSocketIO is complete, the main program can be built and
 3. cmake ..
 4. make
 5. ./UnscentedKF
+
+To plot NIS values, save the output of UnscentedKF in a file and use gnuplot to view the graph, e.g.:
+
+./UnscentedKF > log.txt
+grep -e "^\d" log.txt > nis.dat
+gnuplot> plot 'nis.dat' with lines, 7.8
 
 Tips for setting up your environment can be found [here](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/23d376c7-0195-4276-bdf0-e02f1f3c665d)
 
@@ -89,4 +95,3 @@ for instructions and the project rubric.
 
 ## How to write a README
 A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
-
